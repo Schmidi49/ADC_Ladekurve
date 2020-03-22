@@ -2,20 +2,18 @@
 Testprogram for reading ADC-Channels. Output of the ADC-Voltages on terminal
 *******************************************************************************/
 #include <stdio.h>
-#include "ADC.h"
-#include "USART.h"
-#include "Wait.h"
+#include "K:\DriverLibHW\DriverLibHW\ADC.h"
+#include "K:\DriverLibHW\DriverLibHW\USART.h"
+#include "K:\DriverLibHW\DriverLibHW\Wait.h"
 #include <avr/interrupt.h>
 #include <avr/io.h>
 #include <Arduino.h>
-#include <Wire.h>
-
 
 
 #define CHARGEPIN 0
 #define DISCHARGEPIN 1
 #define ADC_CHANNEL 0
-#define SAMPLING_RATE 100
+#define SAMPLING_RATE 50
 // from #include "ADC.h":
 //#define ADC_VREF_TYPE_EXTERNAL_AVCC 0x40 // ADC voltage reference: AVCC pin
 
@@ -29,9 +27,9 @@ void charge()
 	{
 		adc_value = ADCReadChannel(ADC_CHANNEL); //get adc value 
 		//printf("Conversion %d: 0x%04x %4ldmV\n", i, adc_value, (int32_t)((int32_t)adc_value*(int32_t)5000 / (int32_t)1024)); //sending data to console
-		Wire.write(adc_value);
+		printf("%i\n", adc_value);
 		WaitMs(SAMPLING_RATE);	//Antastrate 
-		i++;
+		//i++;
 	}
 }
 
@@ -44,6 +42,7 @@ void discharge()
 	while (adc_value > 51)	//5% von 5V -> entladen
 	{
 		adc_value = ADCReadChannel(ADC_CHANNEL); //get adc value 
+		printf("%i\n", adc_value);
 	}
 
 	DDRB &= ~(1 << DISCHARGEPIN);	//discharge pin INPUT
@@ -59,23 +58,16 @@ int16_t main(void)
 	DDRB &= ~(1 << DISCHARGEPIN);	//discharge pin INPUT
 	PORTB &= ~(1 << CHARGEPIN);			//charge pin LOW
 
-	USARTInit(0, 115200, 1, 0, 1, 0);
-
-	Wire.begin(); // join i2c bus (address optional for master)
+	USARTInit(0, 9600, 1, 0, 1, 0);
 
 	discharge();	//Kondensator am Anfang entladen
 
 	while(1) 
 	{
-		//printf("+\n");	//start des Werteübertragen (konsole)
-		Wire.beginTransmission(0x08);
-		charge();
-		Wire.write(-1);
-		Wire.endTransmission();
-		//printf("-\n");	//stop des werteübertragens (konsole)
+		charge();  //lädt den Kondensator und schickt kontinuierlich werte
 		discharge();
 
-		WaitMs(10000);
+		WaitMs(5000);
 	}
 
 	return 0;

@@ -24,27 +24,27 @@
     <ClInclude Include="__vm\.ADC_Ladekurve.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\DriverLibHW\ADC.h">
+    <ClInclude Include="K:\DriverLibHW\DriverLibHW\ADC.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\DriverLibHW\USART.h">
+    <ClInclude Include="K:\DriverLibHW\DriverLibHW\USART.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\DriverLibHW\Wait.h">
+    <ClInclude Include="K:\DriverLibHW\DriverLibHW\Wait.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\DriverLibHW\ADC.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\DriverLibHW\USART.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\DriverLibHW\Wait.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="K:\DriverLibHW\DriverLibHW\ADC.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="K:\DriverLibHW\DriverLibHW\USART.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="K:\DriverLibHW\DriverLibHW\Wait.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

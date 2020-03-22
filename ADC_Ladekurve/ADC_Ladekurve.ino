@@ -1,4 +1,4 @@
-///*
+//*
 // Name:		ADC_Ladekurve.ino
 // Created:	16.01.2020 15:42:59
 // Author:	Erik
